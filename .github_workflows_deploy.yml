@@ -1,0 +1,35 @@
+# GitHub Actions Workflow
+name: Deploy Flask App
+
+on:
+  push:
+    branches:
+       
+       - feature-branch-name  # Adjust to your branch
+
+jobs:
+  build:
+    run-on: ubuntu-latest
+
+    steps:
+    -name: Checkout code
+    uses: actions/checkout@v2
+
+
+    -name: Set up Python
+     uses: actions/setup-python@v2
+     with:
+       python-version: '3.x' # Adjust as needed
+    
+    -name: Install dependencies
+     run: 
+       pip install -r requirements.txt
+
+    -name: Run tests
+     run:
+       python -m unittest discover  # Adjust if your test structure is different 
+
+    - name: Deploy to Render
+      run:
+        # Your deployment command here
+        # Example: render deploy command (customize for your setup)
